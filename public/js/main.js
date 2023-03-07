@@ -28,7 +28,12 @@ const displayResults = (weather) => {
 
     let now = new Date();
     let date = document.querySelector('.location .date');
-    date.innerText = dateBuilder(now);
+    date.innerHTML = now.toLocaleDateString('en-US', {
+        weekday : 'long',
+        day : 'numeric',
+        month : 'long',
+        year : 'numeric'
+    });
 
     let temp = document.querySelector('.current .temp');
     temp.innerHTML = `${Math.round(weather.main.temp)}<span>ºc</span>`;
@@ -38,16 +43,4 @@ const displayResults = (weather) => {
 
     let hiLow = document.querySelector('.current .hi-low');
     hiLow.innerText = `${Math.round(weather.main.temp_min)}ºc / ${Math.round(weather.main.temp_max)}ºc`;
-}
-
-const dateBuilder = (date) => {
-    let months = ['January', 'Fabruary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    let day = days[date.getDate()];
-    let currentDate = date.getDate();
-    let month = months[date.getMonth()];
-    let year = date.getFullYear();
-
-    return `${day} ${currentDate} ${month} ${year}`;
 }
